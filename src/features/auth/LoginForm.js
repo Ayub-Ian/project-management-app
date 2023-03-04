@@ -1,15 +1,19 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "./AuthLayout";
 import user_icon from "../../assets/user-icon.svg";
 import lock_icon from "../../assets/lock-icon.svg";
 
 function LoginForm() {
 
+    const navigate = useNavigate()
+
     const [loginData, setLoginData] = useState({
         email : "",
         password : ""
     })
+
+    const [error, setError] =  useState("")
 
     function resetForm() {
         setLoginData({
@@ -28,8 +32,9 @@ function LoginForm() {
 
     function handleSubmit(e) {
         e.preventDefault()
-        console.log({ loginData })
-        resetForm()
+        // console.log({ loginData })
+        
+        
         fetch("http://localhost:9292/user/login", {
             method: "POST",
             headers: {
@@ -39,13 +44,23 @@ function LoginForm() {
             body: JSON.stringify(loginData)
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => { 
+            console.log(data)
+            if (data.error) {
+                setError(data.error)
+            } else {
+                resetForm() 
+                navigate('/projects')
+            }
+
+        })
     }
 
   return (
     <div>
       <AuthLayout>
         <h3 className="tw-text-white">Welcome, please sign in.</h3>
+        {error ? <span className=" tw-text-sm tw-text-red-600 tw-w-72 tw-text-center">{error}</span>:null}
         <form onSubmit={handleSubmit} className="tw-flex tw-flex-col tw-gap-3" autoComplete="off">
           <div className="tw-relative">
             <img

@@ -20,7 +20,7 @@ function LoginForm() {
             </div>
             <input className=' tw-rounded-lg tw-bg-accent-100 tw-px-8 tw-py-1 tw-font-medium' type='submit' value='Sign in'/>
             <span className=' tw-flex tw-gap-1 tw-items-center'>
-                <p className=' tw-text-grey-100 tw-text-sm'>Already have an account ?</p>
+                <p className=' tw-text-grey-100 tw-text-sm'>Don't have an account ?</p>
                 <Link to={`/register`} className=' tw-underline tw-text-accent-100 tw-text-sm'>Sign up</Link>
             </span>
         </AuthLayout>

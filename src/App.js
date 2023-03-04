@@ -1,11 +1,10 @@
-import { AuthLayout } from "./features/auth/AuthLayout";
-
-
+import React from "react";
+import LoginForm from "./features/auth/LoginForm";
 
 function App() {
   return (
     <div className="App">
-      <AuthLayout />
+      <LoginForm />
     </div>
   );
 }

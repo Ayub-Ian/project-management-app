@@ -10,7 +10,7 @@ export const AuthLayout = ({ children }) => {
         </div>
 
         <div className='center tw-bg-secondary tw-rounded-lg'>
-            <div className='tw-flex tw-flex-col tw-justify-center tw-py-6 tw-px-40'>
+            <div className='tw-flex tw-flex-col tw-items-center tw-py-6 tw-px-40 tw-gap-5'>
                 <img src={logoIcon} alt="tachometer icon" />
                 {children}
             </div> 

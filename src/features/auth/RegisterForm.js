@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import bcrypt from "bcryptjs";
 import { AuthLayout } from "./AuthLayout";
 import user_icon from "../../assets/user-icon.svg";
 import lock_icon from "../../assets/lock-icon.svg";
 import web_icon from "../../assets/web-icon.svg";
-import tick_icon from "../../assets/tick-icon.svg";
+// import tick_icon from "../../assets/tick-icon.svg";
 
 function RegisterForm() {
+
+    const navigate = useNavigate()
 
     const [formData, setformData] = useState({
         username: '',
@@ -32,6 +35,9 @@ function RegisterForm() {
 
     function handleSubmit(e) {
         e.preventDefault()
+
+        // const updatedFormData = {...formData, password: bcrypt.hashSync(formData.password, bcrypt.genSaltSync(10))}
+
         fetch("http://localhost:9292/user/create", {
             method: "POST",
             headers: {
@@ -44,6 +50,7 @@ function RegisterForm() {
         .then(data => {
             console.log(data)
             resetForm()
+            navigate("/login")
         })
     }
 

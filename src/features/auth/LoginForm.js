@@ -1,15 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthLayout } from "./AuthLayout";
 import user_icon from "../../assets/user-icon.svg";
 import lock_icon from "../../assets/lock-icon.svg";
 
 function LoginForm() {
+
+    const [loginData, setLoginData] = useState({
+        email : "",
+        password : ""
+    })
+
+    function resetForm() {
+        setLoginData({
+            email : "",
+            password : ""  
+        })
+    }
+
+    function handleChange(e) {
+        let {name, value} = e.target
+        setLoginData({
+            ...loginData,
+            [name] :  value
+        })
+    }
+
+    function handleSubmit(e) {
+        e.preventDefault()
+        console.log({ loginData })
+        resetForm()
+        fetch("http://localhost:9292/user/login", {
+            method: "POST",
+            headers: {
+                "Accept" : "application/json",
+                "Content-Type" : "application/json"
+            },
+            body: JSON.stringify(loginData)
+        })
+        .then(res => res.json())
+        .then(data => console.log(data))
+    }
+
   return (
     <div>
       <AuthLayout>
         <h3 className="tw-text-white">Welcome, please sign in.</h3>
-        <form className="tw-flex tw-flex-col tw-gap-3" autoComplete="off">
+        <form onSubmit={handleSubmit} className="tw-flex tw-flex-col tw-gap-3" autoComplete="off">
           <div className="tw-relative">
             <img
               className="tw-absolute tw-top-2.5 tw-left-3"
@@ -19,8 +56,11 @@ function LoginForm() {
             <input
               type="text"
               autoFocus={true}
+              name="email"
+              value={loginData.email}
+              onChange={handleChange}
               className="tw-w-full tw-h-full tw-bg-transparent tw-border tw-border-grey-100 tw-rounded-lg tw-pr-6 tw-pl-9 tw-py-2 placeholder:tw-text-sm tw-text-white tw-outline-none"
-              placeholder="Enter username"
+              placeholder="Enter email"
             />
           </div>
           <div className="tw-relative">
@@ -30,7 +70,10 @@ function LoginForm() {
               alt="user icon"
             />
             <input
-              type="text"
+              type="password"
+              name="password"
+              value={loginData.password}
+              onChange={handleChange}
               className="tw-w-full tw-h-full tw-bg-transparent tw-border tw-border-grey-100 tw-rounded-lg tw-pr-6 tw-pl-9 tw-py-2 placeholder:tw-text-sm tw-text-white tw-outline-none"
               placeholder="Enter password"
             />

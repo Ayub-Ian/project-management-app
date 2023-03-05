@@ -14,7 +14,8 @@ module.exports = {
         }, 
         'accent' : {
           '100' : '#FFBA03'
-        }
+        },
+        'dark' : '#212121'
       },
     },
   },

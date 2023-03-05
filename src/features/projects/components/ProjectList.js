@@ -1,15 +1,18 @@
 import React from 'react'
-import { MainLayout } from '../../../components/layout/MainLayout'
+import ProjectCard from './ProjectCard'
 
-const ProjectList = () => {
-
-    // if (!user) {
-    //     navigate('/login')
-    // }
+const ProjectList = ({ projects }) => {
   return (
-    <MainLayout>
-    <div>ProjectList</div>
-    </MainLayout>
+    <div className=' tw-mt-8 tw-grid tw-grid-cols-3 tw-gap-6'>
+        {/* project card  */}
+        {projects.map(project => {
+            const { id, category, name, priority, description } = project
+            return (
+                <ProjectCard key={id} category={category} name={name} priority={priority} description={description} />
+            )
+        })}
+
+    </div>
   )
 }
 

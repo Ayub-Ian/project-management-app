@@ -4,7 +4,7 @@ import { AuthLayout } from "./AuthLayout";
 import user_icon from "../../assets/user-icon.svg";
 import lock_icon from "../../assets/lock-icon.svg";
 
-function LoginForm() {
+function LoginForm({updateUser}) {
 
     const navigate = useNavigate()
 
@@ -50,6 +50,7 @@ function LoginForm() {
                 setError(data.error)
             } else {
                 resetForm() 
+                updateUser(data)
                 navigate('/projects')
             }
 

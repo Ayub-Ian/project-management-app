@@ -3,26 +3,38 @@ import { MainLayout } from '../../../components/layout/MainLayout'
 import CreateProject from './CreateProject';
 import { API_URL } from '../../../config'
 import ProjectList from './ProjectList';
+import { useNavigate } from 'react-router-dom';
 
-const Projects = () => {
 
-        // if (!user) {
-    //     navigate('/login')
-    // }
+const Projects = ({user}) => {
+
+  
+    const navigate = useNavigate()
 
     const [showModal, setShowModal] = useState(false);
-    const [projects, setProjects] = useState([])
+    const [projects, setProjects] = useState([]);
 
-    
+    useEffect(()=>{
+        if (!user) {
+            navigate('/login')
+          }
+    }, [])
+
+
     useEffect(() => {
         fetch(`${API_URL}/projects`)
         .then(res => res.json())
         .then(data => setProjects(data))
     }, [])
+
+
+
     
   return (
-    <MainLayout>
-    <div >
+    <MainLayout user={user}>
+    <div className='tw-flex tw-justify-end tw-h-full' >
+        <main className='content'>
+            <div>
         {/* project header  */}
         <div className=' tw-mt-10 tw-border-b tw-border-b-grey-100 tw-pb-6'>
             <div className='tw-mx-8 tw-flex tw-items-start tw-justify-between'>
@@ -48,6 +60,18 @@ const Projects = () => {
             <ProjectList projects={projects} />
 
         </div>
+        </div>
+        </main>
+
+{/*            
+                <aside className='sidebar detail-active tw-hidden md:tw-block'>
+                    <div className=" tw-border-l tw-border-grey-100 tw-bg-transparent tw-p-10 tw-pl-20 tw-text-white tw-h-full ">
+                        <h2 className="tw-mt-20 tw-text-4xl tw-font-semibold tw-text-white">I am a sidebar</h2>
+                    </div>
+                </aside> 
+        
+   */}
+
 
     </div>
     </MainLayout>

@@ -8,7 +8,7 @@ const ProjectList = ({ projects }) => {
         {projects.map(project => {
             const { id, category, name, priority, description } = project
             return (
-                <ProjectCard key={id} category={category} name={name} priority={priority} description={description} />
+                <ProjectCard key={id} id={id} category={category} name={name} priority={priority} description={description} />
             )
         })}
 

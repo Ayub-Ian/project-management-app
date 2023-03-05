@@ -6,7 +6,7 @@ import ProjectList from './ProjectList';
 import { useNavigate } from 'react-router-dom';
 
 
-const Projects = ({user}) => {
+const Projects = ({loggedIn}) => {
 
   
     const navigate = useNavigate()
@@ -15,11 +15,10 @@ const Projects = ({user}) => {
     const [projects, setProjects] = useState([]);
 
     useEffect(()=>{
-        if (!user) {
+        if(!loggedIn){
             navigate('/login')
-          }
-    }, [])
-
+        }
+    }, [loggedIn, navigate])
 
     useEffect(() => {
         fetch(`${API_URL}/projects`)
@@ -28,10 +27,12 @@ const Projects = ({user}) => {
     }, [])
 
 
+    console.log(projects)
+    
 
     
   return (
-    <MainLayout user={user}>
+    <MainLayout loggedIn={loggedIn} >
     <div className='tw-flex tw-justify-end tw-h-full' >
         <main className='content'>
             <div>

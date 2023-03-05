@@ -5,25 +5,23 @@ import LoginForm from "./features/auth/LoginForm";
 import RegisterForm from "./features/auth/RegisterForm";
 import Projects from "./features/projects/components/Projects";
 import ProjectDetail from "./features/projects/components/ProjectDetail";
+import { MainLayout } from "./components/layout/MainLayout";
+import Header from "./components/layout/Header";
 
 function App() {
 
    
-  const [currentUser, setCurrentUser] = useState(null)
-
-  const updateUser = (user) => {
-    setCurrentUser(user)
-  }
-
+  const [loggedIn, setLoggedIn] = useState(!!JSON.parse(localStorage.getItem('loggedIn')))
 
 
   return (
     <div className="App">
+      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
       <Routes>
-        <Route path="login" element={<LoginForm updateUser={updateUser} />} />
+        <Route path="login" element={<LoginForm loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
         <Route path="register" element={<RegisterForm />} />
-        <Route path="projects" element={<Projects user={currentUser} />} />
-        <Route path="project/details/:id" element={<ProjectDetail user={currentUser} />} />
+        <Route path="projects" element={<Projects loggedIn={loggedIn} />} />
+        <Route path="project/details/:id" element={<ProjectDetail />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
     </div>

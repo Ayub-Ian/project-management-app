@@ -2,12 +2,16 @@ import React, { useState } from "react";
 
 export default function CreateProject({ showModal, setShowModal }) {
 
+    // const { id } = user
+
+
     const [projectData, setProjectData] = useState({
         name : '',
         category : '',
         due_date : '',
         description : '',
-        priority : ''
+        priority : '',
+        user_id: ''
     })
 
     function resetForm() {

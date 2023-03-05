@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "./AuthLayout";
 import user_icon from "../../assets/user-icon.svg";
 import lock_icon from "../../assets/lock-icon.svg";
 
-function LoginForm({updateUser}) {
+function LoginForm({loggedIn, setLoggedIn}) {
 
     const navigate = useNavigate()
 
@@ -14,6 +14,12 @@ function LoginForm({updateUser}) {
     })
 
     const [error, setError] =  useState("")
+
+    useEffect(()=>{
+      if(loggedIn){
+          navigate('/projects')
+      }
+  }, [loggedIn, navigate])
 
     function resetForm() {
         setLoginData({
@@ -32,9 +38,7 @@ function LoginForm({updateUser}) {
 
     function handleSubmit(e) {
         e.preventDefault()
-        // console.log({ loginData })
-        
-        
+   
         fetch("http://localhost:9292/user/login", {
             method: "POST",
             headers: {
@@ -49,9 +53,11 @@ function LoginForm({updateUser}) {
             if (data.error) {
                 setError(data.error)
             } else {
-                resetForm() 
-                updateUser(data)
-                navigate('/projects')
+              localStorage.setItem('loggedIn', true)
+              localStorage.setItem('user', JSON.stringify(data))
+              resetForm() 
+              setLoggedIn(true)
+              navigate('/projects')
             }
 
         })

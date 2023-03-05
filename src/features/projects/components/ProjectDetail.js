@@ -1,19 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { MainLayout } from '../../../components/layout/MainLayout'
 import { API_URL } from '../../../config'
 
-const ProjectDetail = ({ user }) => {
+const ProjectDetail = () => {
 
     let { id } = useParams()
-    const navigate = useNavigate()
-
-    useEffect(()=>{
-        if (!user) {
-            navigate('/login')
-          }
-    }, [])
-
+  
     
     const [project, setProject] = useState(null)
 
@@ -35,11 +28,9 @@ const ProjectDetail = ({ user }) => {
         )
     }
     
- 
-
 
   return (
-    <MainLayout user={user}>
+    <MainLayout >
         <div className=' tw-mx-8'>
             <div className='tw-flex tw-flex-col tw-gap-3 tw-mt-12'>
                 <h1 className='tw-text-white tw-text-3xl tw-font-medium'>{project.name}</h1>

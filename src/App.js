@@ -6,6 +6,7 @@ import RegisterForm from "./features/auth/RegisterForm";
 import Projects from "./features/projects/components/Projects";
 import ProjectDetail from "./features/projects/components/ProjectDetail";
 import Header from "./components/layout/Header";
+import LandingPage from "./components/LandingPage";
 
 function App() {
 
@@ -17,6 +18,7 @@ function App() {
     <div className="App">
       <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>
       <Routes>
+        <Route path="/" element={<LandingPage />} />
         <Route path="login" element={<LoginForm loggedIn={loggedIn} setLoggedIn={setLoggedIn} />} />
         <Route path="register" element={<RegisterForm />} />
         <Route path="projects" element={<Projects loggedIn={loggedIn} />} />

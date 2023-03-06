@@ -11,7 +11,7 @@ export default function CreateProject({ showModal, setShowModal }) {
         due_date : '',
         description : '',
         priority : '',
-        user_id: ''
+        user_id: JSON.parse(localStorage.getItem('user') || false)?.id
     })
 
     function resetForm() {
@@ -32,6 +32,35 @@ export default function CreateProject({ showModal, setShowModal }) {
         })
     }
 
+    function makeCurrentUserProjectMember(newProject){
+        const newProjectId = newProject.id
+        const userId = JSON.parse(localStorage.getItem('user') || false)?.id
+
+        console.log(newProjectId, userId)
+
+        fetch(`http://localhost:9292/member/create`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({project_id: newProjectId, user_id: userId})
+        })
+        .then(res => {
+            if(res.ok){
+                res.json().then(data =>
+                    {
+                        console.log(data)
+                        resetForm()
+                        setShowModal(false)
+                    }
+                )
+            }else {
+                res.json().then(error => console.warn(error))
+            }
+        })
+
+    }
+
     function handleSubmit(e) {
         e.preventDefault()
         console.log(projectData)
@@ -48,8 +77,7 @@ export default function CreateProject({ showModal, setShowModal }) {
         .then(data => {
             console.log(data)
             if (!data.error) {
-                resetForm()
-                setShowModal(false)
+                makeCurrentUserProjectMember(data)
             }
         })
     }

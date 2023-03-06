@@ -32,7 +32,7 @@ const ProjectDetail = () => {
   return (
     <MainLayout >
         <div className=' tw-mx-8'>
-            <div className='tw-flex tw-flex-col tw-gap-3 tw-mt-12'>
+            <div className='tw-flex tw-flex-col tw-gap-3 tw-pt-12'>
                 <h1 className='tw-text-white tw-text-3xl tw-font-medium'>{project.name}</h1>
                 <span className='tw-mt-3 tw-flex tw-items-center tw-gap-x-14'>
                     <p>Priority:</p>

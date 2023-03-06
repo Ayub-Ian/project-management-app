@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import bcrypt from "bcryptjs";
 import { AuthLayout } from "./AuthLayout";
 import user_icon from "../../assets/user-icon.svg";
 import lock_icon from "../../assets/lock-icon.svg";
 import web_icon from "../../assets/web-icon.svg";
-// import tick_icon from "../../assets/tick-icon.svg";
+import { API_URL } from "../../config";
+
 
 function RegisterForm() {
 
@@ -38,7 +38,7 @@ function RegisterForm() {
 
         // const updatedFormData = {...formData, password: bcrypt.hashSync(formData.password, bcrypt.genSaltSync(10))}
 
-        fetch("http://localhost:9292/user/create", {
+        fetch(`${API_URL}/user/create`, {
             method: "POST",
             headers: {
                 "Accept": "application/json",

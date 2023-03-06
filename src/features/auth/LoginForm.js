@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "./AuthLayout";
 import user_icon from "../../assets/user-icon.svg";
 import lock_icon from "../../assets/lock-icon.svg";
+import { API_URL } from "../../config";
 
 function LoginForm({loggedIn, setLoggedIn}) {
 
@@ -39,7 +40,7 @@ function LoginForm({loggedIn, setLoggedIn}) {
     function handleSubmit(e) {
         e.preventDefault()
    
-        fetch("http://localhost:9292/user/login", {
+        fetch(`${API_URL}/user/login`, {
             method: "POST",
             headers: {
                 "Accept" : "application/json",

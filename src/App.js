@@ -5,7 +5,6 @@ import LoginForm from "./features/auth/LoginForm";
 import RegisterForm from "./features/auth/RegisterForm";
 import Projects from "./features/projects/components/Projects";
 import ProjectDetail from "./features/projects/components/ProjectDetail";
-import { MainLayout } from "./components/layout/MainLayout";
 import Header from "./components/layout/Header";
 
 function App() {

@@ -28,6 +28,18 @@ const Projects = ({loggedIn}) => {
 
 
     console.log(projects)
+
+    function handleDelete(id) {
+        fetch(`${API_URL}/project/destroy/${id}`, {method: 'DELETE'})
+        .then((res) => {
+            if(res.ok){
+                const newProjectsList = projects.filter(project => project.id !== id)
+                setProjects(newProjectsList)
+            }else {
+                res.json().then(error => console.warn(error))
+            }
+        }) 
+    }
     
 
     
@@ -58,7 +70,7 @@ const Projects = ({loggedIn}) => {
                 <input type="search" placeholder='Search by project name' className=' tw-border-none tw-outline-none tw-bg-secondary tw-pl-8 tw-py-1.5 tw-w-72 tw-rounded-lg placeholder:tw-text-sm' />
             </div>
             {/* project cards container  */}
-            <ProjectList projects={projects} />
+            <ProjectList projects={projects} handleDelete={handleDelete} />
 
         </div>
         </div>

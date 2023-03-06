@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { API_URL } from "../../../config";
 
 export default function CreateProject({ showModal, setShowModal }) {
 
@@ -65,7 +66,7 @@ export default function CreateProject({ showModal, setShowModal }) {
         e.preventDefault()
         console.log(projectData)
 
-        fetch('http://localhost:9292/project/create', {
+        fetch(`${API_URL}/project/create`, {
             method: "POST",
             headers: {
                 "Accept" : "application/json",

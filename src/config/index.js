@@ -1,1 +1,1 @@
-export const API_URL = process.env.REACT_APP_API_URL_DEV
+export const API_URL = "https://api-project-management.onrender.com"
